@@ -27,29 +27,7 @@ const TypewriterEffect = ({ text, speed = 120 }) => {
 
 // Moving Background
 const BackgroundEffect = () => (
-  <div className="absolute inset-0 -z-10 overflow-hidden">
-    <motion.div
-      className="absolute inset-0 bg-gradient-to-r from-indigo-600/30 to-purple-600/30 blur-3xl"
-      animate={{ x: ["0%", "20%", "0%"], y: ["0%", "-10%", "0%"] }}
-      transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-    />
-    <motion.div
-      className="absolute inset-0 bg-gradient-to-tr from-indigo-400/10 via-transparent to-purple-400/10 blur-2xl"
-      animate={{ x: ["0%", "-15%", "0%"], y: ["0%", "10%", "0%"] }}
-      transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-    />
-    {/* Optional floating circles */}
-    <motion.div
-      className="absolute w-72 h-72 bg-purple-600/20 rounded-full top-1/4 left-1/3 blur-3xl"
-      animate={{ y: ["0%", "-20%", "0%"], x: ["0%", "15%", "0%"] }}
-      transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-    />
-    <motion.div
-      className="absolute w-60 h-60 bg-indigo-600/20 rounded-full top-2/3 left-2/3 blur-2xl"
-      animate={{ y: ["0%", "25%", "0%"], x: ["0%", "-15%", "0%"] }}
-      transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-    />
-  </div>
+  <div className="absolute inset-0 -z-10 overflow-hidden" />
 );
 
 // Icon Button
@@ -62,8 +40,7 @@ const IconButton = ({ Icon, delay }) => (
     role="button"
     aria-label="shortcut"
   >
-    <div className="absolute -inset-2 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-30 group-hover:opacity-70 transition duration-300" />
-    <div className="relative p-3 bg-black/50 backdrop-blur-sm rounded-full border border-white/10">
+    <div className="relative p-3 bg-black/70 rounded-full border border-white/20">
       <Icon className="w-6 h-6 text-white" />
     </div>
   </motion.div>
@@ -87,7 +64,7 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
           className="fixed inset-0 bg-[#030014] z-[9999]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0, scale: 1.05, filter: "blur(8px)" }}
+          exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
         >
           <BackgroundEffect />
@@ -135,7 +112,6 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
                 transition={{ delay: 1.2 }}
                 className="relative inline-flex items-center gap-3 px-6 py-3 rounded-full text-xl font-medium text-white group"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/30 to-purple-600/30 rounded-full blur-md" aria-hidden="true" />
                 <div className="relative flex items-center gap-2">
                   <Code2 className="w-5 h-5 text-indigo-400" aria-hidden="true" />
                   <TypewriterEffect text="GUNAVARMAN P" />

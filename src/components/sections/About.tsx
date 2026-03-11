@@ -64,7 +64,7 @@ export const About = () => {
 
           {/* Right Column - Info Cards */}
           <div className="space-y-6">
-            <Card className="p-6 bg-card/50 backdrop-blur-sm border-border">
+            <Card className="p-6 bg-black/70 border-white/20">
               <div className="flex items-start gap-3">
                 <Target className="w-5 h-5 text-primary mt-1" />
                 <div>

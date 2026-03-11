@@ -18,7 +18,7 @@ const StatusBadge = memo(() => (
   <div className="inline-block animate-float lg:mx-0" data-aos="zoom-in">
     <div className="relative group">
       <div className="absolute -inset-0.5 bg-gradient-to-r from-[#6366f1] to-[#a855f7] rounded-full blur opacity-30 group-hover:opacity-50 transition duration-1000"></div>
-      <div className="relative px-3 sm:px-4 py-2 rounded-full bg-black/40 backdrop-blur-xl border border-white/10">
+      <div className="relative px-3 sm:px-4 py-2 rounded-full bg-black/70 border border-white/20">
         <span className="bg-gradient-to-r from-[#6366f1] to-[#a855f7] text-transparent bg-clip-text sm:text-sm text-[0.7rem] font-medium flex items-center">
           <Sparkles className="sm:w-4 sm:h-4 w-3 h-3 mr-2 text-blue-400" />
           Ready to Innovate
@@ -66,7 +66,7 @@ export const Navigation = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/80 backdrop-blur-lg shadow-lg border-b border-border/40"
+          ? "bg-black/80 shadow-lg border-b border-white/10"
           : "bg-transparent"
       }`}
     >
@@ -122,7 +122,7 @@ export const Navigation = () => {
 
       {/* ✅ Mobile Dropdown Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-lg border-t border-border/30 shadow-lg animate-fade-in-down">
+        <div className="md:hidden bg-black/95 border-t border-white/10 shadow-lg animate-fade-in-down">
           <div className="flex flex-col items-center gap-3 py-4">
             {navItems.map((item) => (
               <button
@@ -132,7 +132,7 @@ export const Navigation = () => {
                   ${
                     activeSection === item.href.slice(1)
                       ? "text-white bg-gradient-to-r from-primary to-secondary scale-105"
-                      : "text-muted-foreground hover:text-white hover:bg-gradient-to-r hover:from-primary/30 hover:to-secondary/30"
+                      : "text-muted-foreground hover:text-white"
                   }`}
               >
                 {item.label}

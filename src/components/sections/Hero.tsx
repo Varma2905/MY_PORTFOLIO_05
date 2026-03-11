@@ -36,17 +36,9 @@ const socialLinks: SocialLinkProps[] = [
 const ProfileImage = memo(() => (
   <div className="flex justify-end items-center sm:p-12 sm:py-0 sm:pb-0 p-0 py-2 pb-2">
     <div className="relative group">
-      <div className="absolute -inset-6 opacity-[25%] z-0 hidden sm:block">
-        <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-indigo-500 to-purple-600 rounded-2xl blur-2xl animate-spin-slower" />
-        <div className="absolute inset-0 bg-gradient-to-l from-fuchsia-500 via-rose-500 to-pink-600 rounded-2xl blur-2xl animate-pulse-slow opacity-50" />
-        <div className="absolute inset-0 bg-gradient-to-t from-blue-600 via-cyan-500 to-teal-400 rounded-2xl blur-2xl animate-float opacity-50" />
-      </div>
-
       <div className="relative">
-        <div className="w-72 h-72 sm:w-80 sm:h-80 rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(120,119,198,0.3)] transform transition-all duration-700 group-hover:scale-105">
+        <div className="w-72 h-72 sm:w-80 sm:h-80 rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-700 group-hover:scale-105">
           <div className="absolute inset-0 border-4 border-white/20 rounded-2xl z-20 transition-all duration-700 group-hover:border-white/40 group-hover:scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 z-10 hidden sm:block" />
-          <div className="absolute inset-0 bg-gradient-to-t from-purple-500/20 via-transparent to-blue-500/20 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 hidden sm:block" />
 
           <img
             src={profileImg}
@@ -56,8 +48,6 @@ const ProfileImage = memo(() => (
           />
 
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-700 z-20 hidden sm:block">
-            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-white/10 to-transparent transform translate-y-full group-hover:-translate-y-full transition-transform duration-1000 delay-100" />
             <div className="absolute inset-0 border-8 border-white/10 scale-0 group-hover:scale-100 transition-transform duration-700 animate-pulse-slow rounded-2xl" />
           </div>
         </div>
@@ -75,8 +65,7 @@ const SocialLink = memo(({ icon: Icon, url, label }: SocialLinkProps) => (
     aria-label={label}
     className="group relative p-3"
   >
-    <div className="absolute inset-0 bg-gradient-to-r from-[#6366f1] to-[#a855f7] rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
-    <div className="relative rounded-xl bg-black/50 backdrop-blur-xl p-2 flex items-center justify-center border border-white/10 group-hover:border-white/20 transition-all duration-300">
+    <div className="relative rounded-xl bg-black/70 p-2 flex items-center justify-center border border-white/20 group-hover:border-white/40 transition-all duration-300">
       <Icon className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
     </div>
   </a>
@@ -108,17 +97,18 @@ export const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col md:flex-row items-center justify-between pl-0 md:pl-8 pr-8 md:pr-16 overflow-hidden"
+      className="relative min-h-screen flex flex-col md:flex-row items-center justify-between pl-0 md:pl-8 pr-8 md:pr-16 overflow-hidden bg-[#030014]"
     >
       {/* Aurora Background */}
       <div className="absolute inset-0 z-0">
         <Aurora
-          colorStops={["#7cff67","#B19EEF","#5227FF"]}
+          colorStops={["#6366f1", "#a855f7", "#3b82f6"]}
           blend={0.5}
-          amplitude={1.0}
-          speed={1}
+          amplitude={1.2}
+          speed={0.5}
         />
       </div>
+
 
       {/* Background 3D Scene */}
       <div className="absolute inset-0 z-0">
@@ -127,9 +117,8 @@ export const Hero = () => {
 
       {/* Left Content */}
       <ScrollReveal
-        className={`relative z-10 w-full md:w-1/2 text-left space-y-6 transition-all duration-1000 pl-8 md:pl-0 ${
-          isLoaded ? "opacity-100" : "opacity-0"
-        }`}
+        className={`relative z-10 w-full md:w-1/2 text-left space-y-6 transition-all duration-1000 pl-8 md:pl-0 ${isLoaded ? "opacity-100" : "opacity-0"
+          }`}
         origin="left"
         distance={40}
       >
@@ -154,7 +143,7 @@ export const Hero = () => {
           data-aos-delay="200"
         >
           <Typewriter
-            words={["AI & Full Stack Developer","AI Engineer", "Tech Enthusiast"]}
+            words={["AI & Full Stack Developer", "AI Engineer", "Tech Enthusiast"]}
             typingSpeed={150}
             erasingSpeed={60}
             pause={1000}
@@ -162,7 +151,7 @@ export const Hero = () => {
         </div>
 
         <p
-          className="text-base md:text-lg text-gray-400 max-w-xl leading-relaxed font-light"
+          className="text-base md:text-lg text-gray-200 max-w-xl leading-relaxed font-normal"
           data-aos="fade-up"
           data-aos-delay="400"
         >

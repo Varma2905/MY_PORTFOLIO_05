@@ -31,7 +31,7 @@ export const Projects: React.FC = () => {
           {projects.map((project) => (
             <Card
               key={project.id}
-              className="flex flex-col overflow-hidden bg-card/50 border border-border hover:shadow-lg transition-transform duration-300 hover:scale-[1.03] cursor-pointer rounded-2xl backdrop-blur-md"
+              className="flex flex-col overflow-hidden bg-black/70 border border-white/20 hover:shadow-lg transition-transform duration-300 hover:scale-[1.03] cursor-pointer rounded-2xl"
             >
               <img src={project.image} alt={project.title} className="w-full h-48 object-cover rounded-t-2xl" />
               <div className="flex flex-col p-6 flex-1 justify-between">

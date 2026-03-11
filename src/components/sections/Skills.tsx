@@ -1,8 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import { Stars3D } from '@/components/3d/Stars3D';
-import LogoLoop from '@/components/LogoLoop';
-import img  from '@/assets/stars.jpg';
 const skills = [
   { category: 'Programming Languages', items: ['JavaScript', 'TypeScript', 'Python', 'C++', 'C', 'Java'] },
   { category: 'Frontend', items: ['HTML', 'CSS', 'React', 'JavaScript', 'Three.js', 'Next.js'] },
@@ -14,16 +12,7 @@ const skills = [
   { category: 'Cloud & DevOps', items: ['Netlify', 'Vercel', 'Render'] },
 ];
 
-const techLogos = [
-  { node: '⚙️', title: 'React' },
-  { node: '🔷', title: 'TypeScript' },
-  { node: '🐍', title: 'Python' },
-  { node: '✨', title: 'JavaScript' },
-  { node: '🎨', title: '3D Graphics' },
-  { node: '☁️', title: 'Cloud' },
-  { node: '🛠️', title: 'Tools' },
-  { node: '🤖', title: 'AI/ML' },
-];
+
 
 export const Skills = () => {
   return (
@@ -34,7 +23,6 @@ export const Skills = () => {
       {/* Section Stars Background */}
       <div className="absolute inset-0 -z-20 bg-[#030014]">
         <Stars3D />
-        <div className="absolute inset-0" />
       </div>
 
       <div className="relative z-10 max-w-6xl w-full">
@@ -70,18 +58,6 @@ export const Skills = () => {
           ))}
         </ScrollReveal>
 
-        {/* LogoLoop Showcase */}
-        <ScrollReveal className="mt-20" origin="up" distance={30} delay={0.2}>
-          <h3 className="text-2xl font-semibold mb-8 text-center text-secondary">Tech Stack</h3>
-          <LogoLoop
-            logos={techLogos}
-            speed={50}
-            direction="right"
-            pauseOnHover={true}
-            fadeOut={true}
-            scaleOnHover={true}
-          />
-        </ScrollReveal>
       </div>
     </section>
   );
