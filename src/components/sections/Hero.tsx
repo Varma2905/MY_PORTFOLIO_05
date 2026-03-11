@@ -98,6 +98,7 @@ export const Hero = () => {
     <section
       id="home"
       className="relative min-h-screen flex flex-col md:flex-row items-center justify-between pl-0 md:pl-8 pr-8 md:pr-16 overflow-hidden bg-[#030014]"
+      style={{ backgroundColor: "#030014", width: "100%" }}
     >
       {/* Aurora Background */}
       <div className="absolute inset-0 z-0">
