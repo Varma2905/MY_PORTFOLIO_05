@@ -1,20 +1,14 @@
 import React, { useState, memo } from "react";
 import { Github, Linkedin, Mail, Code, Phone, MapPin } from "lucide-react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { Stars3D } from "@/components/3d/Stars3D";
 import { Card } from "@/components/ui/card";
+import { Stars3D } from "@/components/3d/Stars3D";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client"; 
-type SocialLinkProps = {
-  icon: React.ComponentType<any>;
-  url: string;
-  label?: string;
-};
-
-const SocialLink = memo(({ icon: Icon, url, label }: SocialLinkProps) => {
+// -------------------- Social Link --------------------
+const SocialLink = memo(({ icon: Icon, url, label }) => {
   const isMail = url.startsWith("mailto:");
   return (
     <a
@@ -39,44 +33,44 @@ const socialLinks = [
 ];
 
 // -------------------- Contact Component --------------------
-export const Contact: React.FC = () => {
+export const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  // ✅ Form Submission Handler
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke("send-contact-email", {
-        body: { name, email, message },
+      const response = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
       });
 
-      if (error) {
-        console.error("Error sending email:", error);
-        toast({
-          title: "Error",
-          description: "Failed to send message. Please try again.",
-          variant: "destructive",
-        });
-      } else {
-        toast({
-          title: "Success",
-          description: "Message sent successfully!",
-        });
-        setName("");
-        setEmail("");
-        setMessage("");
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send message.");
       }
-    } catch (err) {
-      console.error("Unexpected error:", err);
+
+      toast({
+        title: "Success",
+        description: "Message sent successfully!!",
+      });
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch (err: any) {
+      console.error(err);
       toast({
         title: "Error",
-        description: "An unexpected error occurred.",
+        description: err.message || "Unexpected error occurred.",
         variant: "destructive",
       });
     } finally {
@@ -85,31 +79,36 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen text-white overflow-hidden">
-      {/* Background Stars */}
-      <div className="absolute inset-0 -z-20 bg-[#030014]">
+    <div className="relative min-h-screen text-white overflow-hidden bg-[#030014]">
+
+      {/* ⭐ Stars Background */}
+      <div className="absolute inset-0 z-0">
         <Stars3D />
       </div>
 
       {/* -------------------- Contact Section -------------------- */}
-      <section id="contact" className="relative py-20 flex flex-col items-center justify-center">
-        <ScrollReveal className="text-center mb-8" origin="up" distance={20} delay={0}>
-          <h2 className="text-5xl font-bold mb-12 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+      <section className="relative z-10 py-20 flex flex-col items-center justify-center">
+
+        <ScrollReveal className="text-center mb-12" origin="up">
+          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
             Get In Touch
           </h2>
           <div className="h-1 w-32 mx-auto bg-gradient-to-r from-purple-400 to-pink-400 rounded-full" />
         </ScrollReveal>
 
         <div className="max-w-6xl w-full grid md:grid-cols-2 gap-6 px-4">
+
           {/* ---------- Contact Form ---------- */}
           <Card className="p-8 bg-black/50 border border-gray-700 backdrop-blur-md">
             <form onSubmit={handleSubmit} className="space-y-6">
+
               <Input
                 placeholder="Your Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
               />
+
               <Input
                 type="email"
                 placeholder="Your Email"
@@ -117,6 +116,7 @@ export const Contact: React.FC = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
+
               <Textarea
                 placeholder="Your Message"
                 rows={5}
@@ -124,20 +124,23 @@ export const Contact: React.FC = () => {
                 onChange={(e) => setMessage(e.target.value)}
                 required
               />
+
               <Button type="submit" className="w-full" disabled={loading}>
                 {loading ? "Sending..." : "Send Message"}
               </Button>
+
             </form>
           </Card>
 
           {/* ---------- Contact Info ---------- */}
           <div className="space-y-6">
+
             <Card className="p-6 bg-black/50 border border-gray-700 flex items-center gap-4 backdrop-blur-md">
               <div className="p-3 bg-purple-700/20 rounded-full">
                 <Mail className="w-6 h-6 text-purple-400" />
               </div>
               <div>
-                <h3 className="font-semibold text-gray-100">Email</h3>
+                <h3 className="font-semibold">Email</h3>
                 <p className="text-gray-300">varma2905.tnp@gmail.com</p>
               </div>
             </Card>
@@ -147,7 +150,7 @@ export const Contact: React.FC = () => {
                 <Phone className="w-6 h-6 text-indigo-400" />
               </div>
               <div>
-                <h3 className="font-semibold text-gray-100">Phone</h3>
+                <h3 className="font-semibold">Phone</h3>
                 <p className="text-gray-300">+91 93616 99358</p>
               </div>
             </Card>
@@ -157,17 +160,19 @@ export const Contact: React.FC = () => {
                 <MapPin className="w-6 h-6 text-pink-400" />
               </div>
               <div>
-                <h3 className="font-semibold text-gray-100">Location</h3>
+                <h3 className="font-semibold">Location</h3>
                 <p className="text-gray-300">Gobichettipalayam, Erode, Tamil Nadu</p>
               </div>
             </Card>
+
           </div>
         </div>
       </section>
 
-      {/* -------------------- Social Links Section -------------------- */}
-      <section className="relative py-20 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto px-4 gap-8">
-        <ScrollReveal className="text-left md:w-1/2" origin="up" distance={20} delay={0}>
+      {/* -------------------- Social Section -------------------- */}
+      <section className="relative z-10 py-20 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto px-4 gap-8">
+
+        <ScrollReveal className="md:w-1/2">
           <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">
             Let's Connect
           </h2>
@@ -176,16 +181,12 @@ export const Contact: React.FC = () => {
           </p>
         </ScrollReveal>
 
-        <ScrollReveal
-          className="flex flex-wrap justify-start md:justify-end gap-4 md:w-1/2"
-          origin="up"
-          distance={20}
-          delay={0.2}
-        >
+        <ScrollReveal className="flex gap-4 md:w-1/2 justify-start md:justify-end" delay={0.2}>
           {socialLinks.map((social) => (
-            <SocialLink key={social.url} icon={social.icon} url={social.url} label={social.label} />
+            <SocialLink key={social.url} {...social} />
           ))}
         </ScrollReveal>
+
       </section>
     </div>
   );

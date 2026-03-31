@@ -1,5 +1,5 @@
-import { Stars3D } from "@/components/3d/Stars3D";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { Stars3D } from "@/components/3d/Stars3D";
 import TiltedCard from "@/components/TiltedCard";
 
 const certifications = [
@@ -33,14 +33,17 @@ export const Certifications = () => {
   return (
     <section
       id="certifications"
-      className="relative min-h-screen flex flex-col items-center justify-center px-4 py-20 overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center px-4 py-20 overflow-hidden bg-[#030014]"
     >
-      {/* Background */}
-      <div className="absolute inset-0 -z-20 bg-[#030014]">
+      {/* ⭐ Stars Background */}
+      <div className="absolute inset-0 z-0">
         <Stars3D />
       </div>
 
+      {/* 📦 Main Content */}
       <div className="relative z-10 max-w-7xl w-full">
+
+        {/* Heading */}
         <ScrollReveal className="text-center mb-16" origin="up" distance={20}>
           <h2 className="text-5xl font-bold mb-8 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
             Certifications
@@ -48,15 +51,15 @@ export const Certifications = () => {
           <div className="h-1 w-32 mx-auto bg-gradient-to-r from-primary to-secondary rounded-full" />
         </ScrollReveal>
 
-        {/* Single row of 3 TiltedCards for Certificates */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-          {certifications.map((cert) => (
-            <ScrollReveal 
-              key={cert.name} 
-              className="flex justify-center" 
-              origin="up" 
-              distance={30} 
-              delay={0.2}
+        {/* Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-12">
+          {certifications.map((cert, index) => (
+            <ScrollReveal
+              key={cert.name}
+              className="flex justify-center"
+              origin="up"
+              distance={30}
+              delay={0.2 + index * 0.1}
             >
               <TiltedCard
                 imageSrc={cert.certificate}
@@ -71,18 +74,24 @@ export const Certifications = () => {
                 showTooltip={true}
                 displayOverlayContent={true}
                 overlayContent={
-                  <div className="bg-black/80 p-4 rounded-xl border border-white/20 text-white w-full">
+                  <div className="bg-black/80 p-4 rounded-xl border border-white/20 text-white w-full backdrop-blur-md">
                     <p className="font-bold text-lg">{cert.name}</p>
-                    <p className="text-sm text-gray-300">{cert.organization}</p>
+                    <p className="text-sm text-gray-300">
+                      {cert.organization}
+                    </p>
+                    <p className="text-xs text-gray-400 mt-1">
+                      {cert.period}
+                    </p>
                   </div>
                 }
               />
             </ScrollReveal>
           ))}
         </div>
+
       </div>
     </section>
   );
 };
 
-export default Certifications;
+export default Certifications;

@@ -9,7 +9,6 @@ import NotFound from "./pages/NotFound";
 import Projects from "./components/sections/Projects";
 import ProjectDetails from "./components/sections/ProjectsDetails";
 import WelcomeScreen from "./components/sections/WelcomeScreen";
-
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -22,7 +21,8 @@ const App = () => {
         <Sonner />
         <WelcomeScreen onLoadingComplete={() => setShowWelcome(false)} />
         {!showWelcome && (
-          <BrowserRouter>
+          <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/projects" element={<Projects />} />

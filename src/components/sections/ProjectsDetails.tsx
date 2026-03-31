@@ -3,7 +3,6 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { FaGithub, FaGlobe } from "react-icons/fa";
-import { Stars3D } from "@/components/3d/Stars3D";
 import { projects } from "@/components/sections/data/ProjectData";
 
 interface SocialLinkType {
@@ -46,10 +45,7 @@ const ProjectDetails: React.FC = () => {
 
   return (
     <div className="relative min-h-screen text-white overflow-hidden">
-      {/* ⭐ Background */}
-      <div className="fixed inset-0 -z-10 bg-[#030014]">
-        <Stars3D />
-      </div>
+
 
       <section className="relative z-10 py-16 px-6 md:px-20">
         {/* 🔙 Back Navigation */}

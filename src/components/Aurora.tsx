@@ -11,7 +11,11 @@ void main() {
 `;
 
 const FRAG = `#version 300 es
+#ifdef GL_FRAGMENT_PRECISION_HIGH
 precision highp float;
+#else
+precision mediump float;
+#endif
 
 uniform float uTime;
 uniform float uAmplitude;
@@ -123,7 +127,8 @@ export default function Aurora(props) {
     const renderer = new Renderer({
       alpha: true,
       premultipliedAlpha: true,
-      antialias: true
+      antialias: true,
+      dpr: Math.min(window.devicePixelRatio || 1, 2)
     });
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);
