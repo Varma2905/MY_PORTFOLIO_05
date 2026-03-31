@@ -87,13 +87,13 @@ export const Contact = () => {
       </div>
 
       {/* -------------------- Contact Section -------------------- */}
-      <section className="relative z-10 py-20 flex flex-col items-center justify-center">
+      <section id="contact" className="relative z-10 py-24 flex flex-col items-center justify-center px-6 sm:px-12 md:px-20 lg:px-32">
 
-        <ScrollReveal className="text-center mb-12" origin="up">
-          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+        <ScrollReveal className="text-center mb-16" origin="up">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
             Get In Touch
           </h2>
-          <div className="h-1 w-32 mx-auto bg-gradient-to-r from-purple-400 to-pink-400 rounded-full" />
+          <div className="h-1 w-24 sm:w-32 mx-auto bg-gradient-to-r from-purple-400 to-pink-400 rounded-full" />
         </ScrollReveal>
 
         <div className="max-w-6xl w-full grid md:grid-cols-2 gap-6 px-4">
@@ -170,10 +170,10 @@ export const Contact = () => {
       </section>
 
       {/* -------------------- Social Section -------------------- */}
-      <section className="relative z-10 py-20 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto px-4 gap-8">
+      <section className="relative z-10 py-24 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto px-6 sm:px-12 md:px-20 lg:px-32 gap-12">
 
-        <ScrollReveal className="md:w-1/2">
-          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">
+        <ScrollReveal className="md:w-1/2 text-center md:text-left">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">
             Let's Connect
           </h2>
           <p className="text-lg text-gray-300">
@@ -181,7 +181,7 @@ export const Contact = () => {
           </p>
         </ScrollReveal>
 
-        <ScrollReveal className="flex gap-4 md:w-1/2 justify-start md:justify-end" delay={0.2}>
+        <ScrollReveal className="flex gap-6 md:w-1/2 justify-center md:justify-end" delay={0.2}>
           {socialLinks.map((social) => (
             <SocialLink key={social.url} {...social} />
           ))}

@@ -4,7 +4,6 @@ import { Github, Linkedin, Code, Download } from "lucide-react";
 import profileImg from "@/assets/me 3.jpg";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import Typewriter from "@/components/ui/Typewriter";
-import Aurora from "@/components/Aurora";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -97,20 +96,9 @@ export const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col md:flex-row items-center justify-between pl-0 md:pl-8 pr-8 md:pr-16 overflow-hidden bg-[#030014]"
+      className="relative min-h-screen flex flex-col md:flex-row items-center justify-center md:justify-between px-6 sm:px-12 md:px-20 lg:px-32 py-20 md:py-0 overflow-hidden bg-[#030014]"
       style={{ backgroundColor: "#030014", width: "100%" }}
     >
-      {/* Aurora Background */}
-      <div className="absolute inset-0 z-0">
-        <Aurora
-          colorStops={["#6366f1", "#a855f7", "#3b82f6"]}
-          blend={0.5}
-          amplitude={1.2}
-          speed={0.5}
-        />
-      </div>
-
-
       {/* Background 3D Scene */}
       <div className="absolute inset-0 z-0">
         <Scene3D />
@@ -118,8 +106,9 @@ export const Hero = () => {
 
       {/* Left Content */}
       <ScrollReveal
-        className={`relative z-10 w-full md:w-1/2 text-left space-y-6 transition-all duration-1000 pl-8 md:pl-0 ${isLoaded ? "opacity-100" : "opacity-0"
-          }`}
+        className={`relative z-10 w-full md:w-3/5 text-center md:text-left space-y-6 transition-all duration-1000 ${
+          isLoaded ? "opacity-100" : "opacity-0"
+        }`}
         origin="left"
         distance={40}
       >
@@ -161,7 +150,7 @@ export const Hero = () => {
 
         {/* ✅ Buttons with Smooth Scroll */}
         <div
-          className="flex flex-col md:flex-row gap-4 md:gap-6 justify-start items-start"
+          className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center md:justify-start items-center"
           data-aos="fade-up"
           data-aos-delay="600"
         >
@@ -197,7 +186,7 @@ export const Hero = () => {
         </div>
 
         {/* ✅ Social Links */}
-        <div className="mt-6 flex flex-wrap justify-start gap-6">
+        <div className="mt-8 flex flex-wrap justify-center md:justify-start gap-4 sm:gap-6">
           {socialLinks.map((social) => (
             <SocialLink
               key={social.label}
@@ -213,6 +202,14 @@ export const Hero = () => {
       <ScrollReveal className="relative z-10 mt-8 md:mt-0" origin="right" distance={40}>
         <ProfileImage />
       </ScrollReveal>
+
+      {/* ✅ Scroll Indicator */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center gap-2">
+        <div className="w-[30px] h-[50px] rounded-full border-2 border-white/20 flex justify-center p-2">
+          <div className="w-1.5 h-3 bg-primary rounded-full animate-bounce" />
+        </div>
+        <span className="text-white/40 text-[10px] uppercase tracking-widest font-bold">Scroll Down</span>
+      </div>
     </section>
   );
 };

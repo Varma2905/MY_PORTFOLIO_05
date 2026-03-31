@@ -33,7 +33,7 @@ export const Education = () => {
   return (
     <section
       id="education"
-      className="relative min-h-screen flex items-center justify-center px-4 py-20 overflow-hidden bg-[#030014]"
+      className="relative min-h-screen flex items-center justify-center px-6 sm:px-12 md:px-20 lg:px-32 py-24 overflow-hidden bg-[#030014]"
     >
       {/* ⭐ Stars Background */}
       <div className="absolute inset-0 z-0">
@@ -44,11 +44,11 @@ export const Education = () => {
       <div className="relative z-10 max-w-4xl w-full">
 
         {/* Heading */}
-        <ScrollReveal className="text-center mb-12" origin="up">
-          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+        <ScrollReveal className="text-center mb-16" origin="up">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
             Education
           </h2>
-          <div className="h-1 w-32 mx-auto bg-gradient-to-r from-primary to-secondary rounded-full" />
+          <div className="h-1 w-24 sm:w-32 mx-auto bg-gradient-to-r from-primary to-secondary rounded-full" />
         </ScrollReveal>
 
         {/* Timeline Cards */}

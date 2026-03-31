@@ -7,54 +7,85 @@ const experiences = [
     title: 'Senior Full Stack Developer',
     company: 'Tech Innovations Inc.',
     period: '2022 - Present',
-    description: 'Leading development of cutting-edge 3D web applications and managing a team of developers.',
+    description:
+      'Leading development of cutting-edge 3D web applications and managing a team of developers.',
   },
   {
     title: 'Frontend Developer',
     company: 'Digital Solutions Ltd.',
     period: '2020 - 2022',
-    description: 'Developed responsive web applications using React and integrated 3D visualizations.',
+    description:
+      'Developed responsive web applications using React and integrated 3D visualizations.',
   },
   {
     title: 'Junior Developer',
     company: 'StartUp Studio',
     period: '2018 - 2020',
-    description: 'Built and maintained multiple client projects using modern web technologies.',
+    description:
+      'Built and maintained multiple client projects using modern web technologies.',
   },
 ];
 
 export const Experience = () => {
   return (
-    <section id="experience" className="relative min-h-screen flex items-center justify-center px-4 py-20 overflow-hidden ">
-      {/* Section Stars Background */}
-      <div className="absolute inset-0 -z-20 bg-[#030014]">
+    <section
+      id="experience"
+      className="relative min-h-screen flex items-center justify-center px-6 sm:px-12 md:px-20 lg:px-32 py-24 overflow-hidden bg-[#030014]"
+    >
+      {/* ⭐ Stars Background */}
+      <div className="absolute inset-0 z-0">
         <Stars3D />
-        <div className="absolute inset-0" />
       </div>
 
-      <div className="max-w-4xl w-full">
-        <ScrollReveal className="text-center mb-8" origin="up" distance={20} delay={0}>
-          <h2 className="text-5xl font-bold mb-12 text-center bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+      {/* 📦 Content */}
+      <div className="relative z-10 max-w-4xl w-full">
+
+        {/* Heading */}
+        <ScrollReveal className="text-center mb-16" origin="up">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
             Experience
           </h2>
+          <div className="h-1 w-24 sm:w-32 mx-auto bg-gradient-to-r from-primary to-secondary rounded-full" />
         </ScrollReveal>
-        
-        <ScrollReveal className="space-y-6" origin="up" distance={20} delay={0.1}>
+
+        {/* Timeline */}
+        <div className="relative space-y-6">
+
+          {/* Vertical Line */}
+          <div className="absolute left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-primary to-secondary rounded-full opacity-30 hidden md:block" />
+
           {experiences.map((exp, index) => (
-            <Card
+            <ScrollReveal
               key={index}
-              className="p-6 bg-card/50 backdrop-blur-sm border-border hover:shadow-[var(--shadow-primary)] transition-all duration-300 animate-fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              origin="up"
+              distance={30}
+              delay={index * 0.2}
             >
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                <h3 className="text-2xl font-semibold text-primary">{exp.title}</h3>
-                <span className="text-secondary text-sm">{exp.period}</span>
-              </div>
-              <p className="text-accent text-lg mb-2">{exp.company}</p>
-              <p className="text-muted-foreground">{exp.description}</p>
-            </Card>
+              <Card className="relative p-6 bg-card/50 backdrop-blur-md border-border hover:shadow-[var(--shadow-primary)] transition-all duration-300">
+
+                {/* Timeline Dot */}
+                <div className="absolute -left-2 top-6 w-4 h-4 bg-primary rounded-full border-4 border-[#030014] hidden md:block" />
+
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                  <h3 className="text-xl md:text-2xl font-semibold text-primary">
+                    {exp.title}
+                  </h3>
+                  <span className="text-secondary text-sm mt-1 md:mt-0">
+                    {exp.period}
+                  </span>
+                </div>
+
+                <p className="text-accent text-base md:text-lg mb-2">
+                  {exp.company}
+                </p>
+
+                <p className="text-muted-foreground">
+                  {exp.description}
+                </p>
+              </Card>
+            </ScrollReveal>
           ))}
-        </ScrollReveal>
+        </div>
       </div>
     </section>
   );

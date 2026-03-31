@@ -9,7 +9,7 @@ export const About = () => {
   return (
     <section
       id="about"
-      className="relative min-h-screen flex flex-col md:flex-row items-center justify-center px-8 md:px-16 overflow-hidden bg-[#030014]"
+      className="relative min-h-screen flex flex-col items-center justify-center px-6 sm:px-12 md:px-20 lg:px-32 py-24 overflow-hidden bg-[#030014]"
     >
       {/* ⭐ Stars Background */}
       <div className="absolute inset-0 z-0">
@@ -26,17 +26,17 @@ export const About = () => {
 
         {/* Heading */}
         <ScrollReveal className="text-center mb-16" origin="up" distance={20} delay={0}>
-          <h2 className="text-5xl font-bold mb-8 bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
             About Me
           </h2>
-          <div className="h-1 w-32 mx-auto bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+          <div className="h-1 w-24 sm:w-32 mx-auto bg-gradient-to-r from-primary to-secondary rounded-full"></div>
         </ScrollReveal>
 
         <ScrollReveal className="grid md:grid-cols-2 gap-8" origin="up" distance={30} delay={0.1}>
 
           {/* Left */}
-          <div>
-            <h3 className="text-3xl font-bold mb-6">
+          <div className="text-center md:text-left">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-6">
               Passionate about AI & Full-Stack Development
             </h3>
 

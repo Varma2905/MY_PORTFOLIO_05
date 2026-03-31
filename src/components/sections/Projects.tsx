@@ -12,7 +12,7 @@ export const Projects = () => {
   return (
     <section
       id="projects"
-      className="relative min-h-screen flex flex-col items-center justify-center px-4 py-20 overflow-hidden bg-[#030014]"
+      className="relative min-h-screen flex flex-col items-center justify-center px-6 sm:px-12 md:px-20 lg:px-32 py-24 overflow-hidden bg-[#030014]"
     >
       {/* ⭐ Stars Background */}
       <div className="absolute inset-0 z-0">
@@ -24,10 +24,10 @@ export const Projects = () => {
 
         {/* Heading */}
         <ScrollReveal className="text-center mb-16" origin="up">
-          <h2 className="text-5xl font-bold mb-8 bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
             Featured Projects
           </h2>
-          <div className="h-1 w-32 mx-auto bg-gradient-to-r from-primary to-secondary rounded-full" />
+          <div className="h-1 w-24 sm:w-32 mx-auto bg-gradient-to-r from-primary to-secondary rounded-full" />
         </ScrollReveal>
 
         {/* Projects Grid */}

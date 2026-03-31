@@ -120,36 +120,69 @@ export const Navigation = () => {
         </div>
       </div>
 
-      {/* ✅ Mobile Dropdown Menu */}
+      {/* ✅ Mobile Dropdown Menu (Secondary approach, let's keep it but enhance) */}
       {menuOpen && (
-        <div className="md:hidden bg-black/95 border-t border-white/10 shadow-lg animate-fade-in-down">
-          <div className="flex flex-col items-center gap-3 py-4">
+        <div className="md:hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl animate-fade-in">
+          <div className="flex flex-col items-center justify-center h-full gap-8">
+            <button 
+              className="absolute top-6 right-6 text-white"
+              onClick={() => setMenuOpen(false)}
+            >
+              <X className="w-8 h-8" />
+            </button>
             {navItems.map((item) => (
               <button
                 key={item.label}
                 onClick={() => scrollToSection(item.href)}
-                className={`w-[90%] py-2 rounded-full text-sm font-medium transition-all duration-300
+                className={`text-2xl font-bold transition-all duration-300
                   ${
                     activeSection === item.href.slice(1)
-                      ? "text-white bg-gradient-to-r from-primary to-secondary scale-105"
-                      : "text-muted-foreground hover:text-white"
+                      ? "text-primary scale-110"
+                      : "text-white/60 hover:text-white"
                   }`}
               >
                 {item.label}
               </button>
             ))}
-
             <a
               href="public\Purple and Pink Gradient Neon Programmer Freelance Resume.pdf"
               download="Resume.pdf"
-              className="w-[90%] text-center py-2 rounded-full border border-primary/60 text-primary hover:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary transition-all duration-300"
+              className="mt-4 px-8 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-bold"
             >
-              <Download className="inline mr-2 h-4 w-4" />
-              Resume
+              <Download className="inline mr-2 h-5 w-5" />
+              Download Resume
             </a>
           </div>
         </div>
       )}
+
+      {/* ✅ Mobile Bottom Navigation (Native App Feel) */}
+      <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-md">
+        <div className="bg-black/60 backdrop-blur-2xl border border-white/10 rounded-3xl py-3 px-6 flex justify-between items-center shadow-2xl">
+          {navItems.slice(0, 4).map((item) => (
+            <button
+              key={item.label}
+              onClick={() => scrollToSection(item.href)}
+              className={`flex flex-col items-center gap-1 transition-all duration-300 ${
+                activeSection === item.href.slice(1) ? "text-primary scale-110" : "text-white/40"
+              }`}
+            >
+              <div className={`w-1.5 h-1.5 rounded-full mb-1 transition-all ${
+                activeSection === item.href.slice(1) ? "bg-primary opacity-100" : "bg-transparent opacity-0"
+              }`} />
+              <span className="text-[10px] font-bold uppercase tracking-wider">{item.label}</span>
+            </button>
+          ))}
+          <button
+            onClick={() => setMenuOpen(true)}
+            className="flex flex-col items-center gap-1 text-white/40"
+          >
+            <div className="w-1.5 h-1.5 rounded-full mb-1 bg-transparent opacity-0" />
+            <Menu className="w-5 h-5" />
+            <span className="text-[10px] font-bold uppercase tracking-wider">More</span>
+          </button>
+        </div>
+      </div>
     </nav>
   );
 };  

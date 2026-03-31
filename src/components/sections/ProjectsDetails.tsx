@@ -61,7 +61,7 @@ const ProjectDetails: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Left Section */}
           <div>
-            <h1 className="text-5xl font-extrabold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               {project.title}
             </h1>
 

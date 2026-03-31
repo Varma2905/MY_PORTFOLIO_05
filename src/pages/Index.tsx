@@ -6,10 +6,12 @@ import { Contact } from '@/components/sections/Contact';
 import { Education } from '@/components/sections/Education';
 import { Experience } from '@/components/sections/Experience';
 import { Certifications } from '@/components/sections/Certification';
+import { Navigation } from '@/components/Navigation';
 
 const Index = () => {
   return (
     <div>
+      <Navigation />
       <Hero />
       <About />
       <Skills />
