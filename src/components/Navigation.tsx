@@ -7,7 +7,6 @@ const navItems = [
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
-  /*{  label: "Experience", href: "#experience" }, */
   { label: "Certifications", href: "#certifications" },
   { label: "Education", href: "#education" },
   { label: "Contact", href: "#contact" },
@@ -63,40 +62,26 @@ export const Navigation = () => {
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-black/80 shadow-lg border-b border-white/10"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* ✅ Logo / Badge */}
+    <>
+      {/* ✅ Desktop Top Nav (Hidden on Mobile) */}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 hidden md:block ${
+          scrolled ? "bg-black/80 shadow-lg border-b border-white/10" : "bg-transparent"
+        }`}
+      >
+        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <StatusBadge />
-
-          {/* ✅ Desktop Menu */}
-          <div className="hidden md:flex gap-3 items-center">
+          <div className="flex gap-3 items-center">
             {navItems.map((item) => (
               <button
                 key={item.label}
                 onClick={() => scrollToSection(item.href)}
-                className={`relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 overflow-hidden
-                  ${
-                    activeSection === item.href.slice(1)
-                      ? "text-white bg-gradient-to-r from-primary to-secondary shadow-[0_0_15px_rgba(255,255,255,0.2)] scale-105"
-                      : "text-muted-foreground hover:text-white"
-                  }`}
+                className={`relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-300
+                  ${activeSection === item.href.slice(1) ? "text-white bg-gradient-to-r from-primary to-secondary" : "text-muted-foreground hover:text-white"}`}
               >
-                <span
-                  className={`absolute inset-0 rounded-full transition-all duration-500 opacity-0 hover:opacity-100
-                    bg-gradient-to-r from-primary/30 to-secondary/30 blur-sm`}
-                ></span>
-
                 <span className="relative z-10">{item.label}</span>
               </button>
             ))}
-
             <Button
               variant="outline"
               size="sm"
@@ -109,80 +94,56 @@ export const Navigation = () => {
               </a>
             </Button>
           </div>
+        </div>
+      </nav>
 
-          {/* ✅ Mobile Menu Toggle */}
-          <button
-            className="md:hidden text-white hover:text-primary transition-all duration-300"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+      {/* ✅ Mobile Top Status Header (New) */}
+      <div className="md:hidden fixed top-0 left-0 right-0 z-50 p-6 flex justify-between items-center pointer-events-none">
+        <div className="pointer-events-auto">
+          <StatusBadge />
         </div>
       </div>
 
-      {/* ✅ Mobile Dropdown Menu (Secondary approach, let's keep it but enhance) */}
+      {/* ✅ Mobile Dropdown Menu (Secondary approach) */}
       {menuOpen && (
-        <div className="md:hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl animate-fade-in">
-          <div className="flex flex-col items-center justify-center h-full gap-8">
-            <button 
-              className="absolute top-6 right-6 text-white"
-              onClick={() => setMenuOpen(false)}
-            >
-              <X className="w-8 h-8" />
+        <div className="md:hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-2xl animate-fade-in flex flex-col items-center justify-center gap-8">
+            <button className="absolute top-6 right-6 text-white" onClick={() => setMenuOpen(false)}>
+              <X className="w-10 h-10" />
             </button>
             {navItems.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => scrollToSection(item.href)}
-                className={`text-2xl font-bold transition-all duration-300
-                  ${
-                    activeSection === item.href.slice(1)
-                      ? "text-primary scale-110"
-                      : "text-white/60 hover:text-white"
-                  }`}
-              >
+              <button key={item.label} onClick={() => scrollToSection(item.href)} className={`text-3xl font-bold transition-all duration-300 ${activeSection === item.href.slice(1) ? "text-purple-400 scale-110" : "text-white/60 hover:text-white"}`}>
                 {item.label}
               </button>
             ))}
-            <a
-              href="public\Purple and Pink Gradient Neon Programmer Freelance Resume.pdf"
-              download="Resume.pdf"
-              className="mt-4 px-8 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-bold"
-            >
-              <Download className="inline mr-2 h-5 w-5" />
-              Download Resume
-            </a>
-          </div>
         </div>
       )}
 
-      {/* ✅ Mobile Bottom Navigation (Native App Feel) */}
-      <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-md">
-        <div className="bg-black/60 backdrop-blur-2xl border border-white/10 rounded-3xl py-3 px-6 flex justify-between items-center shadow-2xl">
+      {/* ✅ Mobile Bottom Navigation (Floating Tab Bar) */}
+      <div className="md:hidden fixed bottom-8 left-1/2 -translate-x-1/2 z-[60] w-[92%] max-w-[400px]">
+        <div className="bg-black/90 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] py-4 px-8 flex justify-between items-center shadow-[0_25px_50px_rgba(0,0,0,0.9)]">
           {navItems.slice(0, 4).map((item) => (
             <button
               key={item.label}
               onClick={() => scrollToSection(item.href)}
-              className={`flex flex-col items-center gap-1 transition-all duration-300 ${
-                activeSection === item.href.slice(1) ? "text-primary scale-110" : "text-white/40"
+              className={`flex flex-col items-center gap-2 transition-all duration-300 ${
+                activeSection === item.href.slice(1) ? "text-purple-400 scale-110" : "text-white/40"
               }`}
             >
-              <div className={`w-1.5 h-1.5 rounded-full mb-1 transition-all ${
-                activeSection === item.href.slice(1) ? "bg-primary opacity-100" : "bg-transparent opacity-0"
-              }`} />
-              <span className="text-[10px] font-bold uppercase tracking-wider">{item.label}</span>
+              <span className="text-[11px] font-bold uppercase tracking-widest">{item.label}</span>
+              {activeSection === item.href.slice(1) && (
+                <div className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_15px_rgba(168,85,247,1)]" />
+              )}
             </button>
           ))}
           <button
             onClick={() => setMenuOpen(true)}
-            className="flex flex-col items-center gap-1 text-white/40"
+            className="flex flex-col items-center gap-2 text-white/40"
           >
-            <div className="w-1.5 h-1.5 rounded-full mb-1 bg-transparent opacity-0" />
-            <Menu className="w-5 h-5" />
-            <span className="text-[10px] font-bold uppercase tracking-wider">More</span>
+            <Menu className="w-6 h-6" />
+            <span className="text-[11px] font-bold uppercase tracking-widest">More</span>
           </button>
         </div>
       </div>
-    </nav>
+    </>
   );
-};  
+};

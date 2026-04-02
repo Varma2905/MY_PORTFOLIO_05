@@ -54,7 +54,7 @@ export const FloatingCube = () => {
           center
           distanceFactor={10}
         >
-          <div className="flex items-center justify-center w-16 h-16 bg-background/80 backdrop-blur-sm rounded-lg p-2 border border-primary/20 hover:border-primary/50 transition-all">
+          <div className="hidden md:flex items-center justify-center w-16 h-16 bg-background/80 backdrop-blur-sm rounded-lg p-2 border border-primary/20 hover:border-primary/50 transition-all">
             <img 
               src={logo.logo} 
               alt={logo.name}
