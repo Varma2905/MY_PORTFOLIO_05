@@ -128,7 +128,7 @@ export const Hero = () => {
 
         {/* ✅ Typewriter */}
         <div
-          className="text-2xl sm:text-3xl md:text-4xl text-gray-300 min-h-[3rem] font-medium "
+          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-300 min-h-[4.5rem] font-medium leading-relaxed"
           data-aos="fade-up"
           data-aos-delay="200"
         >
