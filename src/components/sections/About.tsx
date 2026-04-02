@@ -11,14 +11,12 @@ export const About = () => {
       id="about"
       className="relative min-h-screen flex flex-col items-center justify-center px-6 sm:px-12 md:px-20 lg:px-32 py-24 overflow-hidden"
     >
-      <Stars3D />
-
       {/* 🌌 Orb Background */}
-      <div className="absolute inset-0 z-10 opacity-40 pointer-events-none">
-        <Orb hue={240} backgroundColor="transparent" />
+      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
+        <Orb />
       </div>
       {/* 📦 Main Content */}
-      <div className="relative z-20 max-w-6xl w-full">
+      <div className="relative z-10 max-w-6xl w-full">
 
         {/* Heading */}
         <ScrollReveal className="text-center mb-16" origin="up" distance={20} delay={0}>
