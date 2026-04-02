@@ -38,26 +38,38 @@ app.post("/api/contact", async (req, res) => {
 
     // Send Email via Resend
     if (process.env.RESEND_API_KEY && process.env.PERSONAL_EMAIL) {
-      await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-        },
-        body: JSON.stringify({
-          from: 'Portfolio Contact <onboarding@resend.dev>',
-          to: [process.env.PERSONAL_EMAIL],
-          subject: `New Message from ${name} via Portfolio`,
-          html: `
-            <h3>New Contact Message</h3>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Message:</strong></p>
-            <p>${message.replace(/\n/g, '<br>')}</p>
-          `,
-          reply_to: email,
-        }),
-      }).catch(err => console.error("Error sending email via Resend:", err));
+      console.log("📨 Attempting to send email via Resend...");
+      try {
+        const emailResponse = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+          },
+          body: JSON.stringify({
+            from: 'Portfolio Contact <onboarding@resend.dev>',
+            to: [process.env.PERSONAL_EMAIL],
+            subject: `New Message from ${name} via Portfolio`,
+            html: `
+              <h3>New Contact Message</h3>
+              <p><strong>Name:</strong> ${name}</p>
+              <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Message:</strong></p>
+              <p>${message.replace(/\n/g, '<br>')}</p>
+            `,
+            reply_to: email,
+          }),
+        });
+
+        const emailData = await emailResponse.json();
+        if (emailResponse.ok) {
+          console.log("✅ Email sent successfully via Resend:", emailData.id);
+        } else {
+          console.error("❌ Resend Email Error details:", emailData);
+        }
+      } catch (err) {
+        console.error("❌ Resend Fetch Error:", err);
+      }
     }
 
     res.status(201).json({ success: true, message: "Message sent successfully!!" });

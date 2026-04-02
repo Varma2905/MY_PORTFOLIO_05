@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 // -------------------- Social Link --------------------
-const SocialLink = memo(({ icon: Icon, url, label }) => {
+const SocialLink = memo(({ icon: Icon, url, label }: { icon: any, url: string, label: string }) => {
   const isMail = url.startsWith("mailto:");
   return (
     <a
@@ -38,6 +38,7 @@ export const Contact = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const { toast } = useToast();
 
   const handleSubmit = async (e) => {
@@ -53,16 +54,19 @@ export const Contact = () => {
         body: JSON.stringify({ name, email, message }),
       });
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(data.error || "Failed to send message.");
+        const errorMsg = data.error || (response.status === 500 ? "Backend Error: DB Connection Timed Out. Please Check Whitelist" : "Failed to send message.");
+        throw new Error(errorMsg);
       }
 
       toast({
         title: "Success",
         description: "Message sent successfully!!",
       });
+      
+      setSubmitted(true);
       setName("");
       setEmail("");
       setMessage("");
@@ -79,12 +83,8 @@ export const Contact = () => {
   };
 
   return (
-    <div className="relative min-h-screen text-white overflow-hidden bg-[#030014]">
-
-      {/* ⭐ Stars Background */}
-      <div className="absolute inset-0 z-0">
-        <Stars3D />
-      </div>
+    <div className="relative min-h-screen text-white overflow-hidden">
+      <Stars3D />
 
       {/* -------------------- Contact Section -------------------- */}
       <section id="contact" className="relative z-10 py-24 flex flex-col items-center justify-center px-6 sm:px-12 md:px-20 lg:px-32">
@@ -98,38 +98,52 @@ export const Contact = () => {
 
         <div className="max-w-6xl w-full grid md:grid-cols-2 gap-6 px-4">
 
-          {/* ---------- Contact Form ---------- */}
-          <Card className="p-8 bg-black/50 border border-gray-700 backdrop-blur-md">
-            <form onSubmit={handleSubmit} className="space-y-6">
-
-              <Input
-                placeholder="Your Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-
-              <Input
-                type="email"
-                placeholder="Your Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-
-              <Textarea
-                placeholder="Your Message"
-                rows={5}
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                required
-              />
-
-              <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? "Sending..." : "Send Message"}
-              </Button>
-
-            </form>
+          {/* ---------- Contact Form / Success Message ---------- */}
+          <Card className="p-8 bg-black/50 border border-gray-700 backdrop-blur-md flex flex-col justify-center">
+            {!submitted ? (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <Input
+                  placeholder="Your Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+                <Input
+                  type="email"
+                  placeholder="Your Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <Textarea
+                  placeholder="Your Message"
+                  rows={5}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  required
+                />
+                <Button type="submit" className="w-full" disabled={loading}>
+                  {loading ? "Sending..." : "Send Message"}
+                </Button>
+              </form>
+            ) : (
+              <ScrollReveal className="text-center py-10" origin="up">
+                <div className="w-20 h-20 bg-gradient-to-tr from-purple-600 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(168,85,247,0.4)]">
+                  <Mail className="w-10 h-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Message Sent!</h3>
+                <p className="text-gray-400 mb-8">
+                  Thank you for reaching out! I'll get back to you as soon as possible.
+                </p>
+                <Button 
+                  onClick={() => setSubmitted(false)}
+                  variant="outline"
+                  className="border-purple-500 text-purple-400 hover:bg-purple-500/10"
+                >
+                  Send another message
+                </Button>
+              </ScrollReveal>
+            )}
           </Card>
 
           {/* ---------- Contact Info ---------- */}

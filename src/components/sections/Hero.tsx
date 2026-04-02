@@ -1,5 +1,6 @@
 import React, { useState, useEffect, memo } from "react";
 import { Scene3D } from "@/components/3d/Scene3D";
+import { Stars3D } from "@/components/3d/Stars3D";
 import { Github, Linkedin, Code, Download } from "lucide-react";
 import profileImg from "@/assets/me 3.jpg";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -96,9 +97,10 @@ export const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col md:flex-row items-center justify-center md:justify-between px-6 sm:px-12 md:px-20 lg:px-32 py-20 md:py-0 overflow-hidden bg-[#030014]"
-      style={{ backgroundColor: "#030014", width: "100%" }}
+      className="relative z-10 min-h-screen flex flex-col md:flex-row items-center justify-center md:justify-between px-6 sm:px-12 md:px-20 lg:px-32 py-20 md:py-0 overflow-hidden"
+      style={{ width: "100%" }}
     >
+      <Stars3D />
       {/* Background 3D Scene */}
       <div className="absolute inset-0 z-0">
         <Scene3D />

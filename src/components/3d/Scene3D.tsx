@@ -9,7 +9,6 @@ export const Scene3D = () => {
         <ambientLight intensity={0.3} />
         <pointLight position={[10, 10, 10]} intensity={1} />
         <pointLight position={[-10, -10, -10]} intensity={0.5} color="#22d3ee" />
-        <Stars radius={100} depth={50} count={5000} factor={1} saturation={0} speed={1} />
         <FloatingCube />
         <OrbitControls enableZoom={false} enablePan={false} />
       </Canvas>

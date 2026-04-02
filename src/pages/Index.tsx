@@ -8,14 +8,16 @@ import { Experience } from '@/components/sections/Experience';
 import { Certifications } from '@/components/sections/Certification';
 import { Navigation } from '@/components/Navigation';
 
+
 const Index = () => {
   return (
-    <div>
+    <div className="relative min-h-[100dvh] overflow-hidden">
       <Navigation />
       <Hero />
       <About />
       <Skills />
       <Projects />
+      <Experience />
       <Certifications />
       <Education />
       <Contact />

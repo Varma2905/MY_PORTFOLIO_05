@@ -2,25 +2,21 @@ import { Card } from '@/components/ui/card';
 import { Target, Rocket, Lightbulb } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import Orb from '@/components/Orb';
-import React from 'react';
-import { Stars3D } from '@/components/3d/Stars3D';
+import { Stars3D } from "@/components/3d/Stars3D";
+
 
 export const About = () => {
   return (
     <section
       id="about"
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 sm:px-12 md:px-20 lg:px-32 py-24 overflow-hidden bg-[#030014]"
+      className="relative min-h-screen flex flex-col items-center justify-center px-6 sm:px-12 md:px-20 lg:px-32 py-24 overflow-hidden"
     >
-      {/* ⭐ Stars Background */}
-      <div className="absolute inset-0 z-0">
-        <Stars3D />
-      </div>
+      <Stars3D />
 
       {/* 🌌 Orb Background */}
       <div className="absolute inset-0 z-10 opacity-40 pointer-events-none">
         <Orb hue={240} backgroundColor="transparent" />
       </div>
-
       {/* 📦 Main Content */}
       <div className="relative z-20 max-w-6xl w-full">
 

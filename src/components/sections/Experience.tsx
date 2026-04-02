@@ -1,6 +1,7 @@
 import { Card } from '@/components/ui/card';
+import { Stars3D } from "@/components/3d/Stars3D";
 import ScrollReveal from '@/components/ui/ScrollReveal';
-import { Stars3D } from '@/components/3d/Stars3D';
+
 
 const experiences = [
   {
@@ -30,12 +31,9 @@ export const Experience = () => {
   return (
     <section
       id="experience"
-      className="relative min-h-screen flex items-center justify-center px-6 sm:px-12 md:px-20 lg:px-32 py-24 overflow-hidden bg-[#030014]"
+      className="relative z-10 min-h-screen flex items-center justify-center px-6 sm:px-12 md:px-20 lg:px-32 py-24 overflow-hidden"
     >
-      {/* ⭐ Stars Background */}
-      <div className="absolute inset-0 z-0">
-        <Stars3D />
-      </div>
+      <Stars3D />
 
       {/* 📦 Content */}
       <div className="relative z-10 max-w-4xl w-full">
