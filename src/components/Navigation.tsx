@@ -1,6 +1,7 @@
 import { useState, useEffect, memo } from "react";
+import { motion } from "framer-motion";
 import { Button } from "./ui/button";
-import { Download, Menu, X, Sparkles } from "lucide-react";
+import { Download, Menu, X, Sparkles, Home, User, Code2, Rocket, ScrollText, GraduationCap, Mail } from "lucide-react";
 
 const navItems = [
   { label: "Home", href: "#home" },
@@ -97,53 +98,59 @@ export const Navigation = () => {
         </div>
       </nav>
 
-      {/* ✅ Mobile Top Status Header (New) */}
-      <div className="md:hidden fixed top-0 left-0 right-0 z-50 p-6 flex justify-between items-center pointer-events-none">
+      {/* ✅ Mobile Top Status Header (Minimalist) */}
+      <div className="md:hidden fixed top-0 left-0 right-0 z-50 p-4 flex justify-between items-center pointer-events-none">
         <div className="pointer-events-auto">
           <StatusBadge />
         </div>
       </div>
 
-      {/* ✅ Mobile Dropdown Menu (Secondary approach) */}
+      {/* ✅ Premium Mobile Menu Drawer */}
       {menuOpen && (
-        <div className="md:hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-2xl animate-fade-in flex flex-col items-center justify-center gap-8">
-            <button className="absolute top-6 right-6 text-white" onClick={() => setMenuOpen(false)}>
-              <X className="w-10 h-10" />
-            </button>
-            {navItems.map((item) => (
-              <button key={item.label} onClick={() => scrollToSection(item.href)} className={`text-3xl font-bold transition-all duration-300 ${activeSection === item.href.slice(1) ? "text-purple-400 scale-110" : "text-white/60 hover:text-white"}`}>
+        <div className="md:hidden fixed inset-0 z-[200] bg-black/95 backdrop-blur-2xl animate-fade-in flex flex-col items-center justify-center gap-6">
+          <button
+            className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white border border-white/10"
+            onClick={() => setMenuOpen(false)}
+          >
+            <X className="w-8 h-8 text-indigo-400" />
+          </button>
+
+          <div className="flex flex-col items-center gap-4">
+            {navItems.map((item, idx) => (
+              <motion.button
+                key={item.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.05 }}
+                onClick={() => scrollToSection(item.href)}
+                className={`text-2xl font-bold uppercase tracking-widest transition-all duration-300 ${
+                  activeSection === item.href.slice(1) ? "text-indigo-400 scale-110" : "text-white/60 hover:text-white"
+                }`}
+              >
                 {item.label}
-              </button>
+              </motion.button>
             ))}
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: navItems.length * 0.05 }}
+              className="mt-4"
+            >
+              <Button
+                variant="outline"
+                className="border-indigo-500 text-indigo-400 rounded-full px-8 py-6 h-auto text-lg uppercase font-bold"
+                asChild
+              >
+                <a href="/resume.pdf" download="Resume.pdf">
+                  <Download className="mr-3 h-6 w-6" />
+                  Resume
+                </a>
+              </Button>
+            </motion.div>
+          </div>
         </div>
       )}
-
-      {/* ✅ Mobile Bottom Navigation (Floating Tab Bar) */}
-      <div className="md:hidden fixed bottom-8 left-1/2 -translate-x-1/2 z-[60] w-[92%] max-w-[400px]">
-        <div className="bg-black/90 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] py-4 px-8 flex justify-between items-center shadow-[0_25px_50px_rgba(0,0,0,0.9)]">
-          {navItems.slice(0, 4).map((item) => (
-            <button
-              key={item.label}
-              onClick={() => scrollToSection(item.href)}
-              className={`flex flex-col items-center gap-2 transition-all duration-300 ${
-                activeSection === item.href.slice(1) ? "text-purple-400 scale-110" : "text-white/40"
-              }`}
-            >
-              <span className="text-[11px] font-bold uppercase tracking-widest">{item.label}</span>
-              {activeSection === item.href.slice(1) && (
-                <div className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_15px_rgba(168,85,247,1)]" />
-              )}
-            </button>
-          ))}
-          <button
-            onClick={() => setMenuOpen(true)}
-            className="flex flex-col items-center gap-2 text-white/40"
-          >
-            <Menu className="w-6 h-6" />
-            <span className="text-[11px] font-bold uppercase tracking-widest">More</span>
-          </button>
-        </div>
-      </div>
     </>
   );
 };

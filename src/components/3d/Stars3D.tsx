@@ -17,17 +17,18 @@ export const Stars3D = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+    <div className="absolute inset-0 z-[-1] pointer-events-none overflow-hidden">
 
       <Canvas
         camera={{ position: [0, 0, 1], fov: 75 }}
         gl={{
           antialias: false,
+          alpha: true,
           powerPreference: "high-performance"
         }}
         dpr={isMobile ? 1 : 2}
         style={{
-          position: 'fixed',
+          position: 'absolute',
           top: 0,
           left: 0,
           width: '100%',
@@ -35,26 +36,24 @@ export const Stars3D = () => {
           pointerEvents: 'none'
         }}
       >
-        {/* 🌑 Dark Space Background */}
-        <color attach="background" args={['#000010']} />
+        {/* ✅ TRUE TRANSPARENT */}
+        <color attach="background" args={['#020014']} />
 
-        {/* 💡 Very Low Light */}
-        <ambientLight intensity={0.2} />
+        {/* ❌ REMOVE ambient light completely */}
 
-        {/* ✨ Dark Subtle Stars */}
+        {/* ✨ DARK INDIGO STARS */}
         <Stars
           radius={2}
           depth={40}
-          count={isMobile ? 1500 : 4000}
-          factor={2}          // ⭐ small stars
-          saturation={0}
+          count={isMobile ? 1200 : 2500}
+          factor={1.5}
+          saturation={1}      // 🔥 allow color
           fade
-          speed={0.3}         // ⭐ slow movement
+          speed={0.2}
         />
       </Canvas>
 
-      {/* 🌌 Dark overlay for cinematic look */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" />
+      {/* ❌ REMOVE ANY WHITE OVERLAY */}
     </div>
   );
 };

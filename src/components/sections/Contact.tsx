@@ -2,11 +2,12 @@ import React, { useState, memo } from "react";
 import { Github, Linkedin, Mail, Code, Phone, MapPin } from "lucide-react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { Card } from "@/components/ui/card";
-import { Stars3D } from "@/components/3d/Stars3D";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { Stars3D } from "@/components/3d/Stars3D";
+
 // -------------------- Social Link --------------------
 const SocialLink = memo(({ icon: Icon, url, label }: { icon: any, url: string, label: string }) => {
   const isMail = url.startsWith("mailto:");
@@ -65,7 +66,7 @@ export const Contact = () => {
         title: "Success",
         description: "Message sent successfully!!",
       });
-      
+
       setSubmitted(true);
       setName("");
       setEmail("");
@@ -83,11 +84,20 @@ export const Contact = () => {
   };
 
   return (
-    <div className="relative min-h-screen text-white overflow-hidden">
-      <Stars3D />
+    <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 sm:px-12 md:px-20 lg:px-32 py-24 overflow-hidden bg-gradient-to-b from-[#1a0b2e] via-[#11001e] to-[#22003c]">
+
+      {/* ⭐ 3D Stars & Indigo-Violet Glow Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* ✨ Stars */}
+        <div className="absolute inset-0 opacity-50">
+          <Stars3D />
+        </div>
+        {/* 🌌 Indigo + Violet Glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(79,70,229,0.25),rgba(139,92,246,0.15),transparent_75%)]" />
+      </div>
 
       {/* -------------------- Contact Section -------------------- */}
-      <section id="contact" className="relative z-10 py-24 flex flex-col items-center justify-center px-6 sm:px-12 md:px-20 lg:px-32">
+      <section id="contact" className="relative z-10 py-10 flex flex-col items-center justify-center w-full">
 
         <ScrollReveal className="text-center mb-16" origin="up">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
@@ -135,7 +145,7 @@ export const Contact = () => {
                 <p className="text-gray-400 mb-8">
                   Thank you for reaching out! I'll get back to you as soon as possible.
                 </p>
-                <Button 
+                <Button
                   onClick={() => setSubmitted(false)}
                   variant="outline"
                   className="border-purple-500 text-purple-400 hover:bg-purple-500/10"
@@ -184,9 +194,9 @@ export const Contact = () => {
       </section>
 
       {/* -------------------- Social Section -------------------- */}
-      <section className="relative z-10 py-24 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto px-6 sm:px-12 md:px-20 lg:px-32 gap-12">
+      <section className="relative z-10 py-10 flex flex-col items-center justify-center w-full gap-8">
 
-        <ScrollReveal className="md:w-1/2 text-center md:text-left">
+        <ScrollReveal className="text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">
             Let's Connect
           </h2>
@@ -195,7 +205,7 @@ export const Contact = () => {
           </p>
         </ScrollReveal>
 
-        <ScrollReveal className="flex gap-6 md:w-1/2 justify-center md:justify-end" delay={0.2}>
+        <ScrollReveal className="flex gap-6 justify-center" delay={0.2}>
           {socialLinks.map((social) => (
             <SocialLink key={social.url} {...social} />
           ))}

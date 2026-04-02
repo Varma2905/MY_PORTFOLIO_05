@@ -30,6 +30,8 @@ const ScrollReveal: React.FC<{ children: React.ReactNode; className?: string }> 
   className,
 }) => <div className={className}>{children}</div>;
 
+import { Stars3D } from "@/components/3d/Stars3D";
+
 const ProjectDetails: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -44,10 +46,11 @@ const ProjectDetails: React.FC = () => {
   }
 
   return (
-    <div className="relative min-h-screen text-white overflow-hidden">
+    <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 sm:px-12 md:px-20 lg:px-32 py-24 overflow-hidden bg-gradient-to-b from-[#1a0b2e] via-[#11001e] to-[#22003c]">
+      <Stars3D />
 
 
-      <section className="relative z-10 py-16 px-6 md:px-20">
+      <section className="relative z-10 py-16 w-full">
         {/* 🔙 Back Navigation */}
         <p
           onClick={() => navigate(-1)}

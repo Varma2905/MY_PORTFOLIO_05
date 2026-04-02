@@ -1,5 +1,4 @@
 import { Card } from '@/components/ui/card';
-import { Stars3D } from "@/components/3d/Stars3D";
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
 
@@ -27,13 +26,24 @@ const experiences = [
   },
 ];
 
+import { Stars3D } from '@/components/3d/Stars3D';
+
 export const Experience = () => {
   return (
     <section
       id="experience"
-      className="relative z-10 min-h-screen flex items-center justify-center px-6 sm:px-12 md:px-20 lg:px-32 py-24 overflow-hidden"
+      className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 sm:px-12 md:px-20 lg:px-32 py-24 overflow-hidden bg-gradient-to-b from-[#1a0b2e] via-[#11001e] to-[#22003c]"
     >
-      <Stars3D />
+
+      {/* ⭐ 3D Stars & Indigo-Violet Glow Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* ✨ Stars */}
+        <div className="absolute inset-0 opacity-50">
+          <Stars3D />
+        </div>
+        {/* 🌌 Indigo + Violet Glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(79,70,229,0.25),rgba(139,92,246,0.15),transparent_75%)]" />
+      </div>
 
       {/* 📦 Content */}
       <div className="relative z-10 max-w-4xl w-full">

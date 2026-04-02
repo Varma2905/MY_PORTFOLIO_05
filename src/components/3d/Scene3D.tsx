@@ -1,45 +1,55 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei';
 import { FloatingCube } from './FloatingCube';
+import { Stars3D } from './Stars3D';
 import { useEffect, useState } from 'react';
 
 export const Scene3D = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
+    const check = () => {
+      const width = window.innerWidth;
+      setIsMobile(width < 768);
+      setIsTablet(width >= 768 && width < 1024);
+    };
     check();
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  // ✅ Mobile fallback (NO 3D)
-  if (isMobile) {
-    return (
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black via-gray-900 to-black" />
-    );
-  }
 
   return (
     <div className="absolute inset-0 -z-10">
       <Canvas
         camera={{ position: [0, 0, 5], fov: 75 }}
-        gl={{ alpha: true, antialias: false }} // 🔥 performance boost
-        dpr={[1, 1.5]} // 🔥 limit resolution
+        gl={{
+          alpha: true,
+          antialias: isMobile ? false : (!isTablet),
+          powerPreference: 'high-performance'
+        }}
+        dpr={isMobile ? [1, 1] : (isTablet ? [1, 1.2] : [1, 1.5])}
       >
-        <ambientLight intensity={0.3} />
-        <pointLight position={[10, 10, 10]} intensity={1} />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} color="#22d3ee" />
+        {/* ✅ FORCE TRANSPARENT BACKGROUND */}
+        <color attach="background" args={['#000000']} />
 
+        {/* ❌ NO LIGHTS → removes white haze */}
+        {/* No ambientLight */}
+        {/* No pointLight */}
+
+        {/* ✅ DARK CLEAN STARS */}
         <Stars
-          radius={50}
-          depth={50}
-          count={2000} // 🔥 reduced
-          factor={3}
+          radius={60}
+          depth={60}
+          count={isMobile ? 300 : 600}          // 🔥 reduce more
+          factor={1.5}         // 🔥 smaller = no glow haze
+          saturation={0}       // ⭐ removes bright white tint
           fade
-          speed={1}
+          speed={0.3}
         />
 
+        {/* Optional object */}
         <FloatingCube />
 
         <OrbitControls enableZoom={false} enablePan={false} />
